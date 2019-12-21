@@ -8,7 +8,18 @@
             [clojure.data.json :as json])
   (:gen-class))
 
-(defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
-  (println "Hello, World!"))
+(defn app-routes 
+  (GET "/" [] simple-body-page)
+  (GET "/request" [] request-example)
+  (route/not-found "Error, page not found."))
+
+(defn -main [& args]
+;  This sets up local port var, possibly defined on
+;  env variable, then runs http server with site-defaults, allowing
+;  for sessions, cookies, params, etc.
+  (let [port (Integer/parseInt (or (System/getenv "PORT") "3000"))]
+    ; run server with ring.defaults middleware
+    (server/run-server (wrap-defaults #'app-routes site-defaults) {:port port})
+    (println (str "Running webserver at http:/127.0.0.1:" port "/"))))
+      
+    

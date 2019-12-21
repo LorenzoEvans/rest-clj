@@ -5,10 +5,11 @@
             [ring.middleware.defaults :refer :all]
             [clojure.pprint :as ppr]
             [clojure.string :as str]
-            [clojure.data.json :as json])
+            [clojure.data.json :as json]
+            [rest-api.simple-body-page :refer [simple-body-page request-example]])
   (:gen-class))
 
-(defn app-routes 
+(defn app-routes []
   (GET "/" [] simple-body-page)
   (GET "/request" [] request-example)
   (route/not-found "Error, page not found."))

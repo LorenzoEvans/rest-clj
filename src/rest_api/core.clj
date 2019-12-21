@@ -6,12 +6,14 @@
             [clojure.pprint :as ppr]
             [clojure.string :as str]
             [clojure.data.json :as json]
-            [rest-api.simple-body-page :refer [simple-body-page request-example]])
+            [rest-api.simple-body-page :refer [simple-body-page request-example
+                                               hello-name]])
   (:gen-class))
 
-(defn app-routes []
+(defroutes app-routes
   (GET "/" [] simple-body-page)
   (GET "/request" [] request-example)
+  (GET "/hello" [] hello-name)
   (route/not-found "Error, page not found."))
 
 (defn -main [& args]

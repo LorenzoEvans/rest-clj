@@ -18,3 +18,16 @@
      :headers {"Content-Type" "text/html"}
      :body (-> (ppr/pprint req)
                (str "Hello " (:name (:params req))))})
+
+(def people-collection (atom []))
+
+(defn add-person [f-name l-name]
+    (swap! people-collection conj {:firstname (str/capitalize (first f-name))
+                                   :lasrname (str/capitalize (first l-name))}))
+(add-person "Lore" "Silver")
+(add-person "Klassic" "Kloudhead")
+
+(defn people-handler [req]
+    {:status 20
+     :headers {"Content-Type" "text/json"}
+     :body (str (json/write-str @people-collection))})

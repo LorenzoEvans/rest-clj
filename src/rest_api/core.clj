@@ -7,13 +7,14 @@
             [clojure.string :as str]
             [clojure.data.json :as json]
             [rest-api.simple-body-page :refer [simple-body-page request-example
-                                               hello-name]])
+                                               hello-name people-handler]])
   (:gen-class))
 
 (defroutes app-routes
   (GET "/" [] simple-body-page)
   (GET "/request" [] request-example)
   (GET "/hello" [] hello-name)
+  (GET "/people" [] people-handler)
   (route/not-found "Error, page not found."))
 
 (defn -main [& args]

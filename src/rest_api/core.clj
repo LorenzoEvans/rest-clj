@@ -15,7 +15,7 @@
   (GET "/request" [] request-example)
   (GET "/hello" [] hello-name)
   (GET "/people" [] people-handler)
-  (GET "/people/add" [] add-person-handler)
+  (POST "/people/add" [] add-person-handler)
   (route/not-found "Error, page not found."))
 
 (defn -main [& args]

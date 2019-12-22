@@ -25,8 +25,8 @@
 (def people-collection (atom []))
 
 (defn add-person [f-name l-name]
-    (swap! people-collection conj {:firstname (str/capitalize f-name)
-                                   :lastname (str/capitalize l-name)}))
+    (swap! people-collection conj {:firstname f-name
+                                   :surname l-name}))
 ; (add-person "Lore" "Silver")
 ; (add-person "Klassic" "Kloudhead")
 
@@ -46,5 +46,5 @@
 (defn add-person-handler [req]
     {:status  200
      :headers {"Content-Type" "text/json"}
-     :body    (-> (let [p (partial getparameter req)]
-                    (str (json/write-str (add-person (p :firstname) (p :lastname))))))})
+     :body    (-> (let [p (partial get-parameter req)]
+                    (str (json/write-str (add-person (p :firstname) (p :surname))))))})

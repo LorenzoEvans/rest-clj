@@ -3,11 +3,6 @@
               [clojure.string :as str]
               [clojure.data.json :as json]))
 
-(defn simple-body-page [req]
-    {:status 200
-     :headers {"Content-Type" "text/html"}
-     :body "Hello World"})
-
 (defn request-example [req]
     {:status 200
      :headers {"Content-Type" "text-html"}
@@ -22,13 +17,14 @@
                (str "Hello " (:name (:params req))))})
 ; :name works because we used ?name= as a query string, and our params are turned into a map
 ; in the request object
-(def people-collection (atom []))
+; (def people-collection (atom []))
+(def article-collection (atom []))
 
 (defn add-person [f-name l-name]
     (swap! people-collection conj {:firstname f-name
                                    :surname l-name}))
-; (add-person "Lore" "Silver")
-; (add-person "Klassic" "Kloudhead")
+(defn add-article [title body]
+  (swap! article-collection conj {:title title :body body}))                              
 
 (defn people-handler [req]
     {:status 20
@@ -48,3 +44,9 @@
      :headers {"Content-Type" "text/json"}
      :body    (-> (let [p (partial get-parameter req)]
                     (str (json/write-str (add-person (p :firstname) (p :surname))))))})
+
+(defn article-handler [req]
+  {:status 200
+   :headers {"Content-Type" "text/json"}
+   :body })
+  

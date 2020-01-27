@@ -4,9 +4,11 @@
             [compojure.route :as route]
             [ring.middleware.defaults :refer :all]
             [clojure.pprint :as ppr]
+            [clojure.java.jdbc]
+            [sforc.db :refer [db]]
             [clojure.string :as str]
             [clojure.data.json :as json]
-            [rest-api.simple-body-page :refer [simple-body-page request-example
+            [rest-api.simple-body-page :refer [request-example
                                                hello-name people-handler add-person-handler]])
   (:gen-class))
 

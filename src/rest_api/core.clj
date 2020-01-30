@@ -2,8 +2,8 @@
   (:require [org.httpkit.server :as server]
             [clojure.pprint :as ppr]
             [clojure.java.jdbc]
-            [rest-api.sforc.articles :as articles]
-            [sforc.db :refer [db]]
+            [rest-api.sforc.db.articles :as articles]
+            [rest-api.db :refer [db]]
             [clojure.string :as str]
             [clojure.data.json :as json])
   (:gen-class))
@@ -29,7 +29,7 @@
 (def pp ppr/pprint)
 
 (defn ppl [value]
-  (pp x) (println))
+  (pp value) (println))
 
 (defn gen-tables []
   (articles/create-articles-table))
@@ -50,6 +50,6 @@
 
 (defn -main []
   (drop-tables)
-  (create-tables)
+  (gen-tables)
   (inserts)
   (updates))

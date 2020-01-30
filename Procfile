@@ -1,0 +1,1 @@
+web: java $JVM_OPTS -cp target target/rest-api-0-1-0.jar clojure.main -m rest-api.core.-main
